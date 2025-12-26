@@ -25,7 +25,7 @@ The DOO CX platform uses a clear token system to avoid confusion:
 ### Basic Setup
 
 ```dart
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 
 // Recommended: Use Flutter SDK token
 final params = DOOParameters.forFlutterSDK(

@@ -1,7 +1,7 @@
 # DOO CX Flutter SDK
 
-[![Pub Version](https://img.shields.io/pub/v/doo_cx_flutter_sdk?color=blueviolet)](https://pub.dev/packages/doo_cx_flutter_sdk)
-[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://pub.dev/documentation/doo_cx_flutter_sdk/latest/)
+[![Pub Version](https://img.shields.io/pub/v/doo_cx_flutter_sdk_plus?color=blueviolet)](https://pub.dev/packages/doo_cx_flutter_sdk_plus)
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://pub.dev/documentation/doo_cx_flutter_sdk_plus/latest/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A comprehensive Flutter package to integrate DOO CX into your mobile and web applications for Android, iOS, and Web. [DOO CX](https://www.doo.ooo) helps businesses automate routine tasks, optimize sales and customer service processes, and provide personalized interactions by seamlessly integrating AI with existing tools and workflows.
@@ -24,10 +24,10 @@ A comprehensive Flutter package to integrate DOO CX into your mobile and web app
 
 ```bash
 # 1. Add to your project
-flutter pub add doo_cx_flutter_sdk
+flutter pub add doo_cx_flutter_sdk_plus
 
 # 2. Import and use
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 
 # 3. Add a simple widget
 DOOWidget(
@@ -57,7 +57,7 @@ DOOWidget(
 Run the command below in your terminal:
 
 ```bash
-flutter pub add doo_cx_flutter_sdk
+flutter pub add doo_cx_flutter_sdk_plus
 ```
 
 Or add it manually to your project's `pubspec.yaml` file:
@@ -66,7 +66,7 @@ Or add it manually to your project's `pubspec.yaml` file:
 dependencies:
   flutter:
     sdk: flutter
-  doo_cx_flutter_sdk: ^1.1.0
+  doo_cx_flutter_sdk_plus: ^1.1.0
 ```
 
 Then run:
@@ -90,7 +90,7 @@ DOOWidget provides a ready-to-use webview that displays the DOO chat interface. 
 3. Add the widget to your app:
 
 ```dart
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -154,7 +154,7 @@ class MyHomePage extends StatelessWidget {
 DOO Chat Dialog provides a modal dialog with a built-in chat interface. This is useful when you want to show the chat as an overlay.
 
 ```dart
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 import 'package:flutter/material.dart';
 
 void showDOOChatDialog(BuildContext context) {
@@ -177,7 +177,7 @@ void showDOOChatDialog(BuildContext context) {
 DOO Chat Page provides a full-screen chat interface. This is useful when you want to navigate to a dedicated chat screen.
 
 ```dart
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
@@ -204,7 +204,7 @@ class ChatPage extends StatelessWidget {
 For more advanced use cases, you can use the DOOClient directly to integrate with your custom UI.
 
 ```dart
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 import 'package:flutter/material.dart';
 
 class CustomChatPage extends StatefulWidget {
@@ -390,7 +390,7 @@ To enable file attachments in DOOWidget, implement the `onAttachFile` callback:
 
 ```dart
 import 'dart:io';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';

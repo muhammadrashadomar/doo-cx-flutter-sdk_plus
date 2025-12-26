@@ -1,7 +1,7 @@
 # DOO CX Flutter SDK - Complete Integration Guide
 
-[![Pub Version](https://img.shields.io/pub/v/doo_cx_flutter_sdk?color=blueviolet)](https://pub.dev/packages/doo_cx_flutter_sdk)
-[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://pub.dev/documentation/doo_cx_flutter_sdk/latest/)
+[![Pub Version](https://img.shields.io/pub/v/doo_cx_flutter_sdk_plus?color=blueviolet)](https://pub.dev/packages/doo_cx_flutter_sdk_plus)
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://pub.dev/documentation/doo_cx_flutter_sdk_plus/latest/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A comprehensive Flutter package to integrate DOO CX into your mobile and web applications for Android, iOS, and Web. [DOO CX](https://www.doo.ooo) helps businesses automate routine tasks, optimize sales and customer service processes, and provide personalized interactions by seamlessly integrating AI with existing tools and workflows.
@@ -45,10 +45,10 @@ Get up and running with DOO CX in under 5 minutes:
 
 ```bash
 # 1. Add to your project
-flutter pub add doo_cx_flutter_sdk
+flutter pub add doo_cx_flutter_sdk_plus
 
 # 2. Import the package
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 
 # 3. Add a simple widget
 DOOWidget(
@@ -62,7 +62,7 @@ DOOWidget(
 ### Option 1: Command Line (Recommended)
 
 ```bash
-flutter pub add doo_cx_flutter_sdk
+flutter pub add doo_cx_flutter_sdk_plus
 ```
 
 ### Option 2: Manual Installation
@@ -73,7 +73,7 @@ Add to your `pubspec.yaml`:
 dependencies:
   flutter:
     sdk: flutter
-  doo_cx_flutter_sdk: ^1.1.0
+  doo_cx_flutter_sdk_plus: ^1.1.0
 ```
 
 Then run:
@@ -85,7 +85,7 @@ flutter pub get
 ### Import the Package
 
 ```dart
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 ```
 
 ## 🔧 Setup
@@ -116,7 +116,7 @@ The DOO CX Flutter SDK provides 4 flexible integration methods to suit different
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 
 class ChatScreen extends StatelessWidget {
   @override
@@ -155,7 +155,7 @@ class ChatScreen extends StatelessWidget {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -209,7 +209,7 @@ class MyApp extends StatelessWidget {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 
 class ChatPage extends StatelessWidget {
   @override
@@ -268,7 +268,7 @@ class ChatPage extends StatelessWidget {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 
 class CustomChatScreen extends StatefulWidget {
   @override
@@ -1146,7 +1146,7 @@ void main() {
 
 ### Getting Help
 
-1. **Documentation**: Check the [API reference](https://pub.dev/documentation/doo_cx_flutter_sdk/latest/)
+1. **Documentation**: Check the [API reference](https://pub.dev/documentation/doo_cx_flutter_sdk_plus/latest/)
 2. **GitHub Issues**: [Report bugs or request features](https://github.com/doo-inc/doo-cx-flutter-sdk/issues)
 3. **Support**: Contact support@doo.ooo for technical assistance
 4. **Community**: Join our Discord server for community support
@@ -1157,7 +1157,7 @@ void main() {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk_plus.dart';
 
 void main() {
   runApp(MyApp());
@@ -1259,9 +1259,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🔗 Links
 
 - **Website**: [doo.ooo](https://www.doo.ooo)
-- **Documentation**: [API Reference](https://pub.dev/documentation/doo_cx_flutter_sdk/latest/)
+- **Documentation**: [API Reference](https://pub.dev/documentation/doo_cx_flutter_sdk_plus/latest/)
 - **GitHub**: [Source Code](https://github.com/doo-inc/doo-cx-flutter-sdk)
-- **Pub.dev**: [Package](https://pub.dev/packages/doo_cx_flutter_sdk)
+- **Pub.dev**: [Package](https://pub.dev/packages/doo_cx_flutter_sdk_plus)
 - **Support**: support@doo.ooo
 
 ---

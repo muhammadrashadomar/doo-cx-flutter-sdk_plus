@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  doo_cx_flutter_sdk:
+  doo_cx_flutter_sdk_plus:
     path: ../
   cupertino_icons: ^1.0.8
   image: ^4.2.0
