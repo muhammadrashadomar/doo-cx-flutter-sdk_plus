@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_contact.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_conversation.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_user.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/doo_client_exception.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_contact.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_conversation.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_user.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/doo_client_exception.dart';
 import 'package:dio/dio.dart';
 
 abstract class DOOClientAuthService {

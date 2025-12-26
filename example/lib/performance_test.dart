@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
 import 'dart:async';
+
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk.dart';
+import 'package:flutter/material.dart';
 
 /// Performance testing for DOO CX Flutter SDK
 /// This file tests memory usage, connection stability, and performance
 /// under various load conditions.
 class PerformanceTestPage extends StatefulWidget {
-  const PerformanceTestPage({Key? key}) : super(key: key);
+  const PerformanceTestPage({super.key});
 
   @override
   State<PerformanceTestPage> createState() => _PerformanceTestPageState();
@@ -60,15 +61,18 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
       // Send messages at regular intervals for 30 seconds
       _addResult('📤 Starting 30-second stability test...');
       final timer = Timer.periodic(const Duration(seconds: 2), (timer) async {
-        if (timer.tick > 15) {  // 30 seconds / 2 = 15 ticks
+        if (timer.tick > 15) {
+          // 30 seconds / 2 = 15 ticks
           timer.cancel();
           _addResult('✅ PASSED: Connection stability test completed');
-          _addResult('📊 Messages sent: $_messagesSent, received: $_messagesReceived');
+          _addResult(
+              '📊 Messages sent: $_messagesSent, received: $_messagesReceived');
           return;
         }
 
         try {
-          await client.sendMessage(content: 'Stability test message #${timer.tick}');
+          await client.sendMessage(
+              content: 'Stability test message #${timer.tick}');
           _messagesSent++;
           _addResult('📤 Sent message #$_messagesSent');
         } catch (e) {
@@ -110,14 +114,14 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
         for (int clientIndex = 0; clientIndex < clients.length; clientIndex++) {
           try {
             await clients[clientIndex].sendMessage(
-              content: 'Load test message from client $clientIndex, round $round'
-            );
+                content:
+                    'Load test message from client $clientIndex, round $round');
           } catch (e) {
             _addResult('❌ Failed to send from client $clientIndex: $e');
           }
         }
         _addResult('📊 Completed round ${round + 1}/10');
-        
+
         // Small delay to prevent overwhelming the server
         await Future.delayed(const Duration(milliseconds: 100));
       }
@@ -129,7 +133,6 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
         client.dispose();
       }
       _addResult('🧹 Cleaned up all test clients');
-
     } catch (e) {
       // Ensure cleanup even on failure
       for (final client in clients) {
@@ -168,13 +171,13 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
       // Send messages as fast as possible
       final futures = <Future>[];
       for (int i = 0; i < messageCount; i++) {
-        futures.add(
-          client.sendMessage(content: 'Throughput test message #$i').then((_) {
-            _messagesSent++;
-          }).catchError((e) {
-            _addResult('❌ Message $i failed: $e');
-          })
-        );
+        futures.add(client
+            .sendMessage(content: 'Throughput test message #$i')
+            .then((_) {
+          _messagesSent++;
+        }).catchError((e) {
+          _addResult('❌ Message $i failed: $e');
+        }));
       }
 
       await Future.wait(futures);
@@ -184,9 +187,10 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
       final messagesPerSecond = messageCount / duration.inMilliseconds * 1000;
 
       _addResult('✅ PASSED: Throughput test completed');
-      _addResult('📊 Sent $messageCount messages in ${duration.inMilliseconds}ms');
-      _addResult('📊 Throughput: ${messagesPerSecond.toStringAsFixed(2)} messages/second');
-
+      _addResult(
+          '📊 Sent $messageCount messages in ${duration.inMilliseconds}ms');
+      _addResult(
+          '📊 Throughput: ${messagesPerSecond.toStringAsFixed(2)} messages/second');
     } catch (e) {
       _addResult('❌ FAILED: Message throughput test failed: $e');
     }
@@ -215,9 +219,10 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
       // Send periodic messages for 60 seconds
       _addResult('⏱️ Starting 60-second long-running test...');
       int messageCounter = 0;
-      
+
       final timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
-        if (timer.tick > 12) {  // 60 seconds / 5 = 12 ticks
+        if (timer.tick > 12) {
+          // 60 seconds / 5 = 12 ticks
           timer.cancel();
           _addResult('✅ PASSED: Long-running session test completed');
           _addResult('📊 Total messages sent in long session: $messageCounter');
@@ -226,7 +231,8 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
 
         try {
           messageCounter++;
-          await client.sendMessage(content: 'Long session message #$messageCounter');
+          await client.sendMessage(
+              content: 'Long session message #$messageCounter');
           _addResult('📤 Long session message #$messageCounter sent');
         } catch (e) {
           _addResult('❌ Long session message failed: $e');
@@ -255,19 +261,19 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
         );
 
         testClients.add(client);
-        
+
         // Send a message
         await client.sendMessage(content: 'Cleanup test message $i');
-        
+
         // Immediately dispose
         client.dispose();
-        
+
         _addResult('🧹 Client $i created, used, and disposed');
       }
 
       _addResult('✅ PASSED: Resource cleanup test completed');
-      _addResult('📊 Created and disposed ${ testClients.length} clients successfully');
-
+      _addResult(
+          '📊 Created and disposed ${testClients.length} clients successfully');
     } catch (e) {
       _addResult('❌ FAILED: Resource cleanup test failed: $e');
     }
@@ -295,9 +301,10 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
       final duration = endTime.difference(startTime);
 
       _addResult('✅ PASSED: Widget performance test completed');
-      _addResult('📊 Created $widgetCount widgets in ${duration.inMilliseconds}ms');
-      _addResult('📊 Average: ${(duration.inMilliseconds / widgetCount).toStringAsFixed(2)}ms per widget');
-
+      _addResult(
+          '📊 Created $widgetCount widgets in ${duration.inMilliseconds}ms');
+      _addResult(
+          '📊 Average: ${(duration.inMilliseconds / widgetCount).toStringAsFixed(2)}ms per widget');
     } catch (e) {
       _addResult('❌ FAILED: Widget performance test failed: $e');
     }
@@ -314,24 +321,25 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
     });
 
     _addResult('🚀 Starting comprehensive performance tests...');
-    _addResult('⏱️ Test suite start time: ${_testStartTime!.toIso8601String()}');
+    _addResult(
+        '⏱️ Test suite start time: ${_testStartTime!.toIso8601String()}');
 
     try {
       await _testConnectionStability();
       await Future.delayed(const Duration(seconds: 2));
-      
+
       await _testMemoryUsage();
       await Future.delayed(const Duration(seconds: 2));
-      
+
       await _testMessageThroughput();
       await Future.delayed(const Duration(seconds: 2));
-      
+
       await _testResourceCleanup();
       await Future.delayed(const Duration(seconds: 2));
-      
+
       await _testWidgetPerformance();
       await Future.delayed(const Duration(seconds: 2));
-      
+
       // Note: Long running test is optional due to time constraints
       // await _testLongRunningSession();
 
@@ -340,7 +348,6 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
       _addResult('📊 Total test duration: ${totalDuration.inSeconds} seconds');
       _addResult('📊 Total messages sent: $_messagesSent');
       _addResult('📊 Total messages received: $_messagesReceived');
-
     } catch (e) {
       _addResult('❌ Performance test suite failed: $e');
     } finally {
@@ -374,8 +381,8 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
                 Text(
                   'DOO CX Flutter SDK - Performance Tests',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
@@ -390,14 +397,17 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: _isRunningTests ? null : _runAllTests,
-                        icon: _isRunningTests 
+                        icon: _isRunningTests
                             ? const SizedBox(
                                 width: 16,
                                 height: 16,
-                                child: CircularProgressIndicator(strokeWidth: 2),
+                                child:
+                                    CircularProgressIndicator(strokeWidth: 2),
                               )
                             : const Icon(Icons.speed),
-                        label: Text(_isRunningTests ? 'Running Tests...' : 'Run Performance Tests'),
+                        label: Text(_isRunningTests
+                            ? 'Running Tests...'
+                            : 'Run Performance Tests'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.purple.shade700,
                           foregroundColor: Colors.white,
@@ -417,7 +427,8 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey.shade600,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 16),
                       ),
                     ),
                   ],
@@ -454,11 +465,12 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
                       final isFailure = result.contains('❌ FAILED');
                       final isTest = result.contains('🧪');
                       final isMetric = result.contains('📊');
-                      final isMessage = result.contains('📤') || result.contains('📨');
-                      
+                      final isMessage =
+                          result.contains('📤') || result.contains('📨');
+
                       Color backgroundColor;
                       Color textColor;
-                      
+
                       if (isSuccess) {
                         backgroundColor = Colors.green.shade50;
                         textColor = Colors.green.shade800;
@@ -478,7 +490,7 @@ class _PerformanceTestPageState extends State<PerformanceTestPage> {
                         backgroundColor = Colors.grey.shade50;
                         textColor = Colors.grey.shade800;
                       }
-                      
+
                       return Container(
                         margin: const EdgeInsets.only(bottom: 4),
                         padding: const EdgeInsets.all(8),

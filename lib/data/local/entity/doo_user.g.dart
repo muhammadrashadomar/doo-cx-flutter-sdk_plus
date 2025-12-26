@@ -8,7 +8,7 @@ part of 'doo_user.dart';
 
 class DOOUserAdapter extends TypeAdapter<DOOUser> {
   @override
-  final int typeId = 3;
+  final int typeId = 53;
 
   @override
   DOOUser read(BinaryReader reader) {

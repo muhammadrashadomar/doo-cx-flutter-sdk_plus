@@ -8,7 +8,7 @@ part of 'doo_contact.dart';
 
 class DOOContactAdapter extends TypeAdapter<DOOContact> {
   @override
-  final int typeId = 0;
+  final int typeId = 50;
 
   @override
   DOOContact read(BinaryReader reader) {

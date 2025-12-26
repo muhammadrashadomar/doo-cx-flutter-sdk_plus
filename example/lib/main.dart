@@ -1,15 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk.dart';
 import 'package:flutter/material.dart';
-
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_user.dart';
-import 'package:doo_cx_flutter_sdk/ui/doo_chat_theme.dart';
-import 'package:doo_cx_flutter_sdk/ui/doo_l10n.dart';
-
+import 'package:image/image.dart' as img;
 // For the custom DOOClient chat with "attachment" (image) sending
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 
 // ========= EDIT THESE =========
@@ -19,7 +15,9 @@ const String inboxIdentifier =
 const String agentDisplayName = "AGENT-DISPLAY-NAME";
 // ==============================
 
-void main() => runApp(const MyApp());
+void main() async {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -275,7 +273,7 @@ class _MyChatDialogState extends State<MyChatDialog> {
                 inboxIdentifier: widget.inboxIdentifier,
                 user: widget.user,
                 enablePersistence: true,
-                theme: DOOChatTheme(
+                theme: const DOOChatTheme(
                   primaryColor: DOO_COLOR_PRIMARY,
                   secondaryColor: Colors.white,
                   backgroundColor: DOO_BG_COLOR,
@@ -412,7 +410,7 @@ class _MyDOOClientDialogState extends State<MyDOOClientDialog> {
       content: content,
       messageType: 0, // outgoing
       contentType: "text",
-      contentAttributes: {},
+      contentAttributes: const {},
       createdAt: DateTime.now().toIso8601String(),
       conversationId: 0,
       attachments: const [],

@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:doo_cx_flutter_sdk/ui/webview_widget/utils.dart';
-import 'package:doo_cx_flutter_sdk/ui/webview_widget/platform_webview.dart';
+import 'package:doo_cx_flutter_sdk_plus/ui/webview_widget/utils.dart';
+import 'package:doo_cx_flutter_sdk_plus/ui/webview_widget/platform_webview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,10 +11,10 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import '../../data/local/entity/doo_user.dart';
 
 /// DOO webview implementation
-/// 
+///
 /// This is an internal implementation of the webview that powers the DOOWidget.
 /// It handles initialization, JavaScript injection, cookies, and event handling.
-/// 
+///
 /// {@category FlutterClientSdk}
 class Webview extends StatefulWidget {
   /// URL for DOO widget in webview
@@ -39,26 +39,23 @@ class Webview extends StatefulWidget {
   final void Function()? onLoadCompleted;
 
   /// Creates a Webview instance with the specified configuration
-  Webview({
-    Key? key,
-    required String websiteToken,
-    required String baseUrl,
-    DOOUser? user,
-    String locale = "en",
-    dynamic customAttributes,
-    this.closeWidget,
-    this.onAttachFile,
-    this.onLoadStarted,
-    this.onLoadProgress,
-    this.onLoadCompleted
-  }) : 
-    widgetUrl = "${baseUrl}/widget?website_token=${websiteToken}&locale=${locale}",
-    injectedJavaScript = generateScripts(
-      user: user, 
-      locale: locale, 
-      customAttributes: customAttributes
-    ),
-    super(key: key);
+  Webview(
+      {Key? key,
+      required String websiteToken,
+      required String baseUrl,
+      DOOUser? user,
+      String locale = "en",
+      dynamic customAttributes,
+      this.closeWidget,
+      this.onAttachFile,
+      this.onLoadStarted,
+      this.onLoadProgress,
+      this.onLoadCompleted})
+      : widgetUrl =
+            "${baseUrl}/widget?website_token=${websiteToken}&locale=${locale}",
+        injectedJavaScript = generateScripts(
+            user: user, locale: locale, customAttributes: customAttributes),
+        super(key: key);
 
   @override
   _WebviewState createState() => _WebviewState();
@@ -71,16 +68,16 @@ class _WebviewState extends State<Webview> {
   @override
   void initState() {
     super.initState();
-    
+
     // Only initialize webview for non-web platforms
     if (!kIsWeb) {
-      // Configure platform-specific implementations  
+      // Configure platform-specific implementations
       if (defaultTargetPlatform == TargetPlatform.android) {
         WebViewPlatform.instance = AndroidWebViewPlatform();
       } else if (defaultTargetPlatform == TargetPlatform.iOS) {
         WebViewPlatform.instance = WebKitWebViewPlatform();
       }
-      
+
       _initWebView();
     }
   }
@@ -95,11 +92,11 @@ class _WebviewState extends State<Webview> {
 
     // Create and configure the WebViewController
     final controller = WebViewController();
-    
+
     // Configure JavaScript and background color
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
     controller.setBackgroundColor(Colors.white);
-    
+
     controller
       ..setNavigationDelegate(
         NavigationDelegate(
@@ -123,24 +120,25 @@ class _WebviewState extends State<Webview> {
               _handleFileSelection();
               return NavigationDecision.prevent;
             }
-            
+
             // Open external links in browser
             _goToUrl(request.url);
             return NavigationDecision.prevent;
           },
         ),
       )
-      ..addJavaScriptChannel(
-        "ReactNativeWebView",
-        onMessageReceived: _handleJavaScriptMessage
-      )
+      ..addJavaScriptChannel("ReactNativeWebView",
+          onMessageReceived: _handleJavaScriptMessage)
       ..loadRequest(Uri.parse(webviewUrl));
 
     // Configure platform-specific features
     if (!kIsWeb) {
-      if (defaultTargetPlatform == TargetPlatform.android && widget.onAttachFile != null) {
-        final androidController = controller.platform as AndroidWebViewController;
-        androidController.setOnShowFileSelector((_) => widget.onAttachFile!.call());
+      if (defaultTargetPlatform == TargetPlatform.android &&
+          widget.onAttachFile != null) {
+        final androidController =
+            controller.platform as AndroidWebViewController;
+        androidController
+            .setOnShowFileSelector((_) => widget.onAttachFile!.call());
       } else if (defaultTargetPlatform == TargetPlatform.iOS) {
         final iOSController = controller.platform as WebKitWebViewController;
         iOSController.setAllowsBackForwardNavigationGestures(false);
@@ -155,13 +153,13 @@ class _WebviewState extends State<Webview> {
   void _handleJavaScriptMessage(JavaScriptMessage jsMessage) {
     debugPrint("DOO message received: ${jsMessage.message}");
     final message = getMessage(jsMessage.message);
-    
+
     if (isJsonString(message)) {
       try {
         final parsedMessage = jsonDecode(message);
         final eventType = parsedMessage["event"];
         final type = parsedMessage["type"];
-        
+
         if (eventType == 'loaded') {
           final authToken = parsedMessage["config"]?["authToken"];
           if (authToken != null) {
@@ -169,15 +167,17 @@ class _WebviewState extends State<Webview> {
             _controller?.runJavaScript(widget.injectedJavaScript);
           }
         }
-        
+
         // Improved close button handling with multiple event types
-        if (type == 'close-widget' || type == 'close' || eventType == 'close-widget') {
+        if (type == 'close-widget' ||
+            type == 'close' ||
+            eventType == 'close-widget') {
           // Add a small delay to ensure the event is properly processed
           Future.microtask(() {
             widget.closeWidget?.call();
           });
         }
-        
+
         // Handle widget toggle events as well
         if (type == 'toggle-widget' && parsedMessage["isOpen"] == false) {
           Future.microtask(() {
@@ -198,7 +198,7 @@ class _WebviewState extends State<Webview> {
       final uri = Uri.parse(widget.widgetUrl);
       final websiteToken = uri.queryParameters['website_token'] ?? '';
       final baseUrl = '${uri.scheme}://${uri.host}:${uri.port}';
-      
+
       return WebWebview(
         websiteToken: websiteToken,
         baseUrl: baseUrl,
@@ -209,20 +209,20 @@ class _WebviewState extends State<Webview> {
         onLoadCompleted: widget.onLoadCompleted,
       );
     }
-    
+
     return _controller != null
-      ? Stack(
-          children: [
-            WebViewWidget(controller: _controller!),
-            if (_isLoading)
-              const Center(
-                child: CircularProgressIndicator(),
-              ),
-          ],
-        )
-      : const Center(
-          child: CircularProgressIndicator(),
-        );
+        ? Stack(
+            children: [
+              WebViewWidget(controller: _controller!),
+              if (_isLoading)
+                const Center(
+                  child: CircularProgressIndicator(),
+                ),
+            ],
+          )
+        : const Center(
+            child: CircularProgressIndicator(),
+          );
   }
 
   void _goToUrl(String url) async {

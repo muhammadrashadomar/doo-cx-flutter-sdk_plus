@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
 
-import 'package:doo_cx_flutter_sdk/doo_callbacks.dart';
-import 'package:doo_cx_flutter_sdk/doo_client.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_user.dart';
-import 'package:doo_cx_flutter_sdk/data/local/local_storage.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/doo_client_exception.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/requests/doo_action_data.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/requests/doo_new_message_request.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/responses/doo_event.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/service/doo_client_service.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_callbacks.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_client.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_user.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/local_storage.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/doo_client_exception.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/requests/doo_action_data.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/requests/doo_new_message_request.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/responses/doo_event.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/service/doo_client_service.dart';
 import 'package:flutter/material.dart';
 
 /// Handles interactions between DOO client api service[clientService] and

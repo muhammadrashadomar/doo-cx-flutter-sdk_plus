@@ -1,18 +1,18 @@
-import 'package:doo_cx_flutter_sdk/data/doo_repository.dart';
-import 'package:doo_cx_flutter_sdk/data/local/dao/doo_contact_dao.dart';
-import 'package:doo_cx_flutter_sdk/data/local/dao/doo_conversation_dao.dart';
-import 'package:doo_cx_flutter_sdk/data/local/dao/doo_messages_dao.dart';
-import 'package:doo_cx_flutter_sdk/data/local/dao/doo_user_dao.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_contact.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_conversation.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_message.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_user.dart';
-import 'package:doo_cx_flutter_sdk/data/local/local_storage.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/service/doo_client_api_interceptor.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/service/doo_client_auth_service.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/service/doo_client_service.dart';
-import 'package:doo_cx_flutter_sdk/doo_parameters.dart';
-import 'package:doo_cx_flutter_sdk/repository_parameters.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/doo_repository.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_contact_dao.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_conversation_dao.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_messages_dao.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_user_dao.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_contact.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_conversation.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_message.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_user.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/local_storage.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/service/doo_client_api_interceptor.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/service/doo_client_auth_service.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/service/doo_client_service.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_parameters.dart';
+import 'package:doo_cx_flutter_sdk_plus/repository_parameters.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -21,7 +21,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 ///
 /// This provider creates a Dio instance without authentication interceptors
 /// for initial API calls that don't require authentication
-final unauthenticatedDioProvider = Provider.family<Dio, DOOParameters>((ref, params) {
+final unauthenticatedDioProvider =
+    Provider.family<Dio, DOOParameters>((ref, params) {
   return Dio(BaseOptions(
     baseUrl: params.baseUrl,
     connectTimeout: const Duration(seconds: 30),
@@ -32,7 +33,8 @@ final unauthenticatedDioProvider = Provider.family<Dio, DOOParameters>((ref, par
 /// Provides an instance of [DOOClientApiInterceptor]
 ///
 /// This interceptor handles authentication for API requests
-final dooClientApiInterceptorProvider = Provider.family<DOOClientApiInterceptor, DOOParameters>((ref, params) {
+final dooClientApiInterceptorProvider =
+    Provider.family<DOOClientApiInterceptor, DOOParameters>((ref, params) {
   final localStorage = ref.watch(localStorageProvider(params));
   final authService = ref.watch(dooClientAuthServiceProvider(params));
   return DOOClientApiInterceptor(
@@ -43,7 +45,8 @@ final dooClientApiInterceptorProvider = Provider.family<DOOClientApiInterceptor,
 ///
 /// This provider creates a Dio instance with the necessary interceptors
 /// to authenticate all requests made with this instance
-final authenticatedDioProvider = Provider.family<Dio, DOOParameters>((ref, params) {
+final authenticatedDioProvider =
+    Provider.family<Dio, DOOParameters>((ref, params) {
   final authenticatedDio = Dio(BaseOptions(
     baseUrl: params.baseUrl,
     connectTimeout: const Duration(seconds: 30),
@@ -57,7 +60,8 @@ final authenticatedDioProvider = Provider.family<Dio, DOOParameters>((ref, param
 /// Provides instance of DOO client auth service [DOOClientAuthService]
 ///
 /// This service handles authentication with the DOO API
-final dooClientAuthServiceProvider = Provider.family<DOOClientAuthService, DOOParameters>((ref, params) {
+final dooClientAuthServiceProvider =
+    Provider.family<DOOClientAuthService, DOOParameters>((ref, params) {
   final unAuthenticatedDio = ref.watch(unauthenticatedDioProvider(params));
   return DOOClientAuthServiceImpl(dio: unAuthenticatedDio);
 });
@@ -65,7 +69,8 @@ final dooClientAuthServiceProvider = Provider.family<DOOClientAuthService, DOOPa
 /// Provides instance of DOO client API service [DOOClientService]
 ///
 /// This service handles all API communication with the DOO backend
-final dooClientServiceProvider = Provider.family<DOOClientService, DOOParameters>((ref, params) {
+final dooClientServiceProvider =
+    Provider.family<DOOClientService, DOOParameters>((ref, params) {
   final authenticatedDio = ref.watch(authenticatedDioProvider(params));
   return DOOClientServiceImpl(params.baseUrl, dio: authenticatedDio);
 });
@@ -126,13 +131,15 @@ final userBoxProvider = Provider<Box<DOOUser>>((ref) {
 ///
 /// Creates an in-memory storage if persistence isn't enabled,
 /// otherwise uses Hive boxes to store the DOO client's contact information
-final dooContactDaoProvider = Provider.family<DOOContactDao, DOOParameters>((ref, params) {
+final dooContactDaoProvider =
+    Provider.family<DOOContactDao, DOOParameters>((ref, params) {
   if (!params.isPersistenceEnabled) {
     return NonPersistedDOOContactDao();
   }
 
   final contactBox = ref.watch(contactBoxProvider);
-  final clientInstanceToContactBox = ref.watch(clientInstanceToContactBoxProvider);
+  final clientInstanceToContactBox =
+      ref.watch(clientInstanceToContactBoxProvider);
   return PersistedDOOContactDao(
       contactBox, clientInstanceToContactBox, params.clientInstanceKey);
 });
@@ -141,12 +148,14 @@ final dooContactDaoProvider = Provider.family<DOOContactDao, DOOParameters>((ref
 ///
 /// Creates an in-memory storage if persistence isn't enabled,
 /// otherwise uses Hive boxes to store the DOO client's conversation
-final dooConversationDaoProvider = Provider.family<DOOConversationDao, DOOParameters>((ref, params) {
+final dooConversationDaoProvider =
+    Provider.family<DOOConversationDao, DOOParameters>((ref, params) {
   if (!params.isPersistenceEnabled) {
     return NonPersistedDOOConversationDao();
   }
   final conversationBox = ref.watch(conversationBoxProvider);
-  final clientInstanceToConversationBox = ref.watch(clientInstanceToConversationBoxProvider);
+  final clientInstanceToConversationBox =
+      ref.watch(clientInstanceToConversationBoxProvider);
   return PersistedDOOConversationDao(conversationBox,
       clientInstanceToConversationBox, params.clientInstanceKey);
 });
@@ -155,12 +164,14 @@ final dooConversationDaoProvider = Provider.family<DOOConversationDao, DOOParame
 ///
 /// Creates an in-memory storage if persistence isn't enabled,
 /// otherwise uses Hive boxes to store the DOO client's messages
-final dooMessagesDaoProvider = Provider.family<DOOMessagesDao, DOOParameters>((ref, params) {
+final dooMessagesDaoProvider =
+    Provider.family<DOOMessagesDao, DOOParameters>((ref, params) {
   if (!params.isPersistenceEnabled) {
     return NonPersistedDOOMessagesDao();
   }
   final messagesBox = ref.watch(messagesBoxProvider);
-  final messageToClientInstanceBox = ref.watch(messageToClientInstanceBoxProvider);
+  final messageToClientInstanceBox =
+      ref.watch(messageToClientInstanceBoxProvider);
   return PersistedDOOMessagesDao(
       messagesBox, messageToClientInstanceBox, params.clientInstanceKey);
 });
@@ -169,7 +180,8 @@ final dooMessagesDaoProvider = Provider.family<DOOMessagesDao, DOOParameters>((r
 ///
 /// Creates an in-memory storage if persistence isn't enabled,
 /// otherwise uses Hive boxes to store user information
-final dooUserDaoProvider = Provider.family<DOOUserDao, DOOParameters>((ref, params) {
+final dooUserDaoProvider =
+    Provider.family<DOOUserDao, DOOParameters>((ref, params) {
   if (!params.isPersistenceEnabled) {
     return NonPersistedDOOUserDao();
   }
@@ -182,7 +194,8 @@ final dooUserDaoProvider = Provider.family<DOOUserDao, DOOParameters>((ref, para
 /// Provides an instance of local storage
 ///
 /// This combines all DAOs to provide a unified local storage interface
-final localStorageProvider = Provider.family<LocalStorage, DOOParameters>((ref, params) {
+final localStorageProvider =
+    Provider.family<LocalStorage, DOOParameters>((ref, params) {
   final contactDao = ref.watch(dooContactDaoProvider(params));
   final conversationDao = ref.watch(dooConversationDaoProvider(params));
   final userDao = ref.watch(dooUserDaoProvider(params));
@@ -198,7 +211,8 @@ final localStorageProvider = Provider.family<LocalStorage, DOOParameters>((ref, 
 /// Provides an instance of DOO repository
 ///
 /// This is the main repository that handles all DOO SDK operations
-final dooRepositoryProvider = Provider.family<DOORepository, RepositoryParameters>((ref, repoParams) {
+final dooRepositoryProvider =
+    Provider.family<DOORepository, RepositoryParameters>((ref, repoParams) {
   final localStorage = ref.watch(localStorageProvider(repoParams.params));
   final clientService = ref.watch(dooClientServiceProvider(repoParams.params));
 

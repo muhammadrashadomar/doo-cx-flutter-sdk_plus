@@ -1,6 +1,6 @@
 import "dart:convert";
 
-import "package:doo_cx_flutter_sdk/data/local/entity/doo_user.dart";
+import "package:doo_cx_flutter_sdk_plus/data/local/entity/doo_user.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 
 import "constants.dart";

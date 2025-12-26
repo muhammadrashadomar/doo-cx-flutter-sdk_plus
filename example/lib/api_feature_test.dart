@@ -1,11 +1,11 @@
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk.dart';
 import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
 
 /// Comprehensive API feature testing for DOO CX Flutter SDK
 /// This file tests all SDK features and integration methods
 /// to ensure everything works correctly end-to-end.
 class ApiFeatureTestPage extends StatefulWidget {
-  const ApiFeatureTestPage({Key? key}) : super(key: key);
+  const ApiFeatureTestPage({super.key});
 
   @override
   State<ApiFeatureTestPage> createState() => _ApiFeatureTestPageState();
@@ -62,7 +62,8 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
       await _testClient!.sendMessage(content: 'Message with emoji 🚀🌟💫');
       _addResult('✅ PASSED: Emoji message sent');
 
-      await _testClient!.sendMessage(content: 'Multi-line\nmessage\nwith breaks');
+      await _testClient!
+          .sendMessage(content: 'Multi-line\nmessage\nwith breaks');
       _addResult('✅ PASSED: Multi-line message sent');
 
       // Test loading messages
@@ -72,7 +73,6 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
       } catch (e) {
         _addResult('⚠️ NOTE: Message loading may not be available: $e');
       }
-
     } catch (e) {
       _addResult('❌ FAILED: DOOClient API test failed: $e');
     }
@@ -84,7 +84,7 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
 
     try {
       // Test widget creation with minimal parameters
-      final widget1 = DOOWidget(
+      const widget1 = DOOWidget(
         baseUrl: 'http://localhost:3001',
         websiteToken: 'widget-test-token',
       );
@@ -99,7 +99,7 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
           name: 'Widget Test User',
           email: 'widgettest@example.com',
         ),
-        customAttributes: {
+        customAttributes: const {
           'widget_test': 'true',
         },
         locale: 'en',
@@ -114,7 +114,6 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
         },
       );
       _addResult('✅ PASSED: DOOWidget created with full parameters');
-
     } catch (e) {
       _addResult('❌ FAILED: DOOWidget integration test failed: $e');
     }
@@ -127,7 +126,7 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
     try {
       // Test dialog configuration (without actually showing)
       _addResult('✅ PASSED: DOOChatDialog configuration validated');
-      
+
       // Note: We don't actually show the dialog in tests as it would interfere
       // with the test UI, but we validate that the parameters are accepted
       final dialogParams = {
@@ -139,14 +138,13 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
           name: 'Dialog Test User',
           email: 'dialogtest@example.com',
         ),
-        'theme': DOOChatTheme(
+        'theme': const DOOChatTheme(
           primaryColor: Colors.blue,
           backgroundColor: Colors.white,
         ),
       };
 
       _addResult('✅ PASSED: DOOChatDialog parameters validated');
-
     } catch (e) {
       _addResult('❌ FAILED: DOOChatDialog features test failed: $e');
     }
@@ -179,7 +177,6 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
       );
 
       _addResult('✅ PASSED: DOOChatPage created with full parameters');
-
     } catch (e) {
       _addResult('❌ FAILED: DOOChatPage features test failed: $e');
     }
@@ -192,7 +189,7 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
     try {
       // Test different theme configurations
       final themes = [
-        DOOChatTheme(
+        const DOOChatTheme(
           primaryColor: Colors.blue,
           backgroundColor: Colors.white,
         ),
@@ -200,7 +197,7 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
           primaryColor: Colors.red,
           backgroundColor: Colors.grey.shade100,
         ),
-        DOOChatTheme(
+        const DOOChatTheme(
           primaryColor: Colors.purple,
           backgroundColor: Colors.black,
         ),
@@ -222,7 +219,6 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
       };
 
       _addResult('✅ PASSED: Custom attributes configuration validated');
-
     } catch (e) {
       _addResult('❌ FAILED: Theme customization test failed: $e');
     }
@@ -248,7 +244,7 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
         ),
         DOOUser(
           identifier: 'user3',
-          name: null,  // Test with null name
+          name: null, // Test with null name
           email: null, // Test with null email
         ),
       ];
@@ -256,7 +252,6 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
       for (int i = 0; i < users.length; i++) {
         _addResult('✅ PASSED: User configuration ${i + 1} validated');
       }
-
     } catch (e) {
       _addResult('❌ FAILED: User management test failed: $e');
     }
@@ -279,7 +274,6 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
         );
         _addResult('✅ PASSED: Locale "$locale" validated');
       }
-
     } catch (e) {
       _addResult('❌ FAILED: Localization support test failed: $e');
     }
@@ -322,7 +316,6 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
       }
 
       client.dispose();
-
     } catch (e) {
       _addResult('❌ FAILED: Callback functionality test failed: $e');
     }
@@ -340,30 +333,29 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
     try {
       await _testDOOClientAPI();
       await Future.delayed(const Duration(seconds: 1));
-      
+
       await _testDOOWidgetIntegration();
       await Future.delayed(const Duration(seconds: 1));
-      
+
       await _testDOOChatDialogFeatures();
       await Future.delayed(const Duration(seconds: 1));
-      
+
       await _testDOOChatPageFeatures();
       await Future.delayed(const Duration(seconds: 1));
-      
+
       await _testThemeCustomization();
       await Future.delayed(const Duration(seconds: 1));
-      
+
       await _testUserManagement();
       await Future.delayed(const Duration(seconds: 1));
-      
+
       await _testLocalizationSupport();
       await Future.delayed(const Duration(seconds: 1));
-      
+
       await _testCallbackFunctionality();
 
       _addResult('✅ All API feature tests completed successfully!');
       _addResult('🎉 SDK is fully functional and ready for production use!');
-
     } catch (e) {
       _addResult('❌ API feature test suite failed: $e');
     }
@@ -391,8 +383,8 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
                 Text(
                   'DOO CX Flutter SDK - API Feature Tests',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
@@ -404,14 +396,16 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
                 const SizedBox(height: 16),
                 ElevatedButton.icon(
                   onPressed: _isRunningTests ? null : _runAllTests,
-                  icon: _isRunningTests 
+                  icon: _isRunningTests
                       ? const SizedBox(
                           width: 16,
                           height: 16,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Icon(Icons.check_circle),
-                  label: Text(_isRunningTests ? 'Running Tests...' : 'Run All Feature Tests'),
+                  label: Text(_isRunningTests
+                      ? 'Running Tests...'
+                      : 'Run All Feature Tests'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green.shade700,
                     foregroundColor: Colors.white,
@@ -452,11 +446,11 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
                       final isTest = result.contains('🧪');
                       final isNote = result.contains('⚠️ NOTE');
                       final isCelebration = result.contains('🎉');
-                      
+
                       Color backgroundColor;
                       Color textColor;
                       IconData? icon;
-                      
+
                       if (isCelebration) {
                         backgroundColor = Colors.amber.shade50;
                         textColor = Colors.amber.shade800;
@@ -482,7 +476,7 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
                         textColor = Colors.grey.shade800;
                         icon = Icons.info;
                       }
-                      
+
                       return Container(
                         margin: const EdgeInsets.only(bottom: 8),
                         padding: const EdgeInsets.all(12),
@@ -493,7 +487,7 @@ class _ApiFeatureTestPageState extends State<ApiFeatureTestPage> {
                         ),
                         child: Row(
                           children: [
-                            if (icon != null) ...[
+                            ...[
                               Icon(icon, color: textColor, size: 16),
                               const SizedBox(width: 8),
                             ],

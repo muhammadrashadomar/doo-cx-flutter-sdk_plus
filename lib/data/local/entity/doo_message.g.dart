@@ -8,7 +8,7 @@ part of 'doo_message.dart';
 
 class DOOMessageAdapter extends TypeAdapter<DOOMessage> {
   @override
-  final int typeId = 2;
+  final int typeId = 52;
 
   @override
   DOOMessage read(BinaryReader reader) {

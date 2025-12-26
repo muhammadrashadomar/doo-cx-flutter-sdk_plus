@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_message.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_message.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class DOOMessagesDao {

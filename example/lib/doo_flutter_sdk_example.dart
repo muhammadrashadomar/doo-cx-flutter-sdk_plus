@@ -1,10 +1,10 @@
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk.dart';
 import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
 
 /// Example showing comprehensive Flutter SDK configuration
 /// with all available customization options
 class DOOFlutterSDKExample extends StatelessWidget {
-  const DOOFlutterSDKExample({Key? key}) : super(key: key);
+  const DOOFlutterSDKExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class DOOFlutterSDKExample extends StatelessWidget {
         inboxIdentifier: 'your-inbox-identifier',
         enablePersistence: true,
       );
-      
+
       // Client created successfully
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -76,7 +76,7 @@ class DOOFlutterSDKExample extends StatelessWidget {
         identifier: 'user123',
         name: 'John Doe',
         email: 'john@example.com',
-        customAttributes: {
+        customAttributes: const {
           'subscription': 'premium',
           'signup_date': '2024-01-15',
         },
@@ -89,11 +89,12 @@ class DOOFlutterSDKExample extends StatelessWidget {
         enablePersistence: true,
         locale: 'en',
       );
-      
+
       // Client created successfully
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Customized SDK initialized successfully!')),
+          const SnackBar(
+              content: Text('Customized SDK initialized successfully!')),
         );
       }
     } catch (e) {
@@ -113,7 +114,7 @@ class DOOFlutterSDKExample extends StatelessWidget {
         identifier: 'enterprise-user-456',
         name: 'Enterprise User',
         email: 'enterprise@company.com',
-        customAttributes: {
+        customAttributes: const {
           'subscription': 'enterprise',
           'company': 'Enterprise Corp',
           'contract_tier': 'platinum',
@@ -129,11 +130,12 @@ class DOOFlutterSDKExample extends StatelessWidget {
         enablePersistence: true,
         locale: 'en',
       );
-      
+
       // Client created successfully
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Enterprise SDK initialized successfully!')),
+          const SnackBar(
+              content: Text('Enterprise SDK initialized successfully!')),
         );
       }
     } catch (e) {
@@ -148,7 +150,6 @@ class DOOFlutterSDKExample extends StatelessWidget {
 
 /// Alternative initialization methods for different use cases
 class DOOAdvancedExamples {
-  
   /// Initialize for different environments
   static Future<DOOClient> createForEnvironment({
     required String environment,
@@ -168,7 +169,7 @@ class DOOAdvancedExamples {
     };
 
     final config = baseConfig[environment]!;
-    
+
     return await DOOClient.create(
       baseUrl: config['baseUrl'] as String,
       inboxIdentifier: inboxIdentifier,
@@ -197,7 +198,7 @@ class DOOAdvancedExamples {
         ...?additionalAttributes,
       },
     );
-    
+
     return await DOOClient.create(
       baseUrl: baseUrl,
       inboxIdentifier: inboxIdentifier,

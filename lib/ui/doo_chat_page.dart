@@ -1,10 +1,10 @@
-import 'package:doo_cx_flutter_sdk/doo_callbacks.dart';
-import 'package:doo_cx_flutter_sdk/doo_client.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_message.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_user.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/doo_client_exception.dart';
-import 'package:doo_cx_flutter_sdk/ui/doo_chat_theme.dart';
-import 'package:doo_cx_flutter_sdk/ui/doo_l10n.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_callbacks.dart';
+import 'package:doo_cx_flutter_sdk_plus/doo_client.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_message.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_user.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/doo_client_exception.dart';
+import 'package:doo_cx_flutter_sdk_plus/ui/doo_chat_theme.dart';
+import 'package:doo_cx_flutter_sdk_plus/ui/doo_l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
@@ -432,7 +432,7 @@ class _DOOChatState extends State<DOOChat> {
               children: [
                 Image.asset(
                   "assets/doo-logo.png",
-                  package: 'doo_cx_flutter_sdk',
+                  package: 'doo_cx_flutter_sdk_plus',
                   width: 15,
                   height: 15,
                 ),

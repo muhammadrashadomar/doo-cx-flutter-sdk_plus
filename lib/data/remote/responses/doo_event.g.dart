@@ -8,7 +8,7 @@ part of 'doo_event.dart';
 
 class DOOEventMessageUserAdapter extends TypeAdapter<DOOEventMessageUser> {
   @override
-  final int typeId = 4;
+  final int typeId = 54;
 
   @override
   DOOEventMessageUser read(BinaryReader reader) {

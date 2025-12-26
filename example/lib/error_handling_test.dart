@@ -1,11 +1,11 @@
+import 'package:doo_cx_flutter_sdk_plus/doo_cx_flutter_sdk.dart';
 import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/doo_cx_flutter_sdk.dart';
 
 /// Comprehensive error handling and edge case testing for DOO CX Flutter SDK
 /// This file demonstrates robust error handling patterns and tests edge cases
 /// to ensure the SDK works reliably under all conditions.
 class ErrorHandlingTestPage extends StatefulWidget {
-  const ErrorHandlingTestPage({Key? key}) : super(key: key);
+  const ErrorHandlingTestPage({super.key});
 
   @override
   State<ErrorHandlingTestPage> createState() => _ErrorHandlingTestPageState();
@@ -85,7 +85,7 @@ class _ErrorHandlingTestPageState extends State<ErrorHandlingTestPage> {
       // Try to send a message
       await client.sendMessage(content: 'Test message');
       _addResult('❌ FAILED: Should have failed with network error');
-      
+
       client.dispose();
     } catch (e) {
       _addResult('✅ PASSED: Network error properly caught: $e');
@@ -126,7 +126,8 @@ class _ErrorHandlingTestPageState extends State<ErrorHandlingTestPage> {
 
       // Test message with special characters
       try {
-        await client.sendMessage(content: 'Test 🚀 emoji & special chars: @#\$%^&*()');
+        await client.sendMessage(
+            content: 'Test 🚀 emoji & special chars: @#\$%^&*()');
         _addResult('✅ PASSED: Special characters handled properly');
       } catch (e) {
         _addResult('❌ FAILED: Special characters should be supported: $e');
@@ -249,9 +250,9 @@ class _ErrorHandlingTestPageState extends State<ErrorHandlingTestPage> {
         inboxIdentifier: 'edge-case-inbox',
         enablePersistence: true,
         user: DOOUser(
-          identifier: '',  // Empty identifier
-          name: '',        // Empty name
-          email: '',       // Empty email
+          identifier: '', // Empty identifier
+          name: '', // Empty name
+          email: '', // Empty email
         ),
       );
 
@@ -339,8 +340,8 @@ class _ErrorHandlingTestPageState extends State<ErrorHandlingTestPage> {
                 Text(
                   'DOO CX Flutter SDK - Error Handling & Edge Case Tests',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
@@ -352,14 +353,15 @@ class _ErrorHandlingTestPageState extends State<ErrorHandlingTestPage> {
                 const SizedBox(height: 16),
                 ElevatedButton.icon(
                   onPressed: _isRunningTests ? null : _runAllTests,
-                  icon: _isRunningTests 
+                  icon: _isRunningTests
                       ? const SizedBox(
                           width: 16,
                           height: 16,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Icon(Icons.play_arrow),
-                  label: Text(_isRunningTests ? 'Running Tests...' : 'Run All Tests'),
+                  label: Text(
+                      _isRunningTests ? 'Running Tests...' : 'Run All Tests'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red.shade700,
                     foregroundColor: Colors.white,
@@ -386,10 +388,10 @@ class _ErrorHandlingTestPageState extends State<ErrorHandlingTestPage> {
                       final isSuccess = result.contains('✅ PASSED');
                       final isFailure = result.contains('❌ FAILED');
                       final isTest = result.contains('🧪');
-                      
+
                       Color backgroundColor;
                       Color textColor;
-                      
+
                       if (isSuccess) {
                         backgroundColor = Colors.green.shade50;
                         textColor = Colors.green.shade800;
@@ -403,7 +405,7 @@ class _ErrorHandlingTestPageState extends State<ErrorHandlingTestPage> {
                         backgroundColor = Colors.grey.shade50;
                         textColor = Colors.grey.shade800;
                       }
-                      
+
                       return Container(
                         margin: const EdgeInsets.only(bottom: 8),
                         padding: const EdgeInsets.all(12),
@@ -432,7 +434,7 @@ class _ErrorHandlingTestPageState extends State<ErrorHandlingTestPage> {
 
 /// Test Widget Integration Error Handling
 class WidgetErrorTestPage extends StatefulWidget {
-  const WidgetErrorTestPage({Key? key}) : super(key: key);
+  const WidgetErrorTestPage({super.key});
 
   @override
   State<WidgetErrorTestPage> createState() => _WidgetErrorTestPageState();
@@ -452,8 +454,8 @@ class _WidgetErrorTestPageState extends State<WidgetErrorTestPage> {
 
     // Test DOOWidget with invalid parameters
     try {
-      DOOWidget(
-        baseUrl: '',  // Invalid empty URL
+      const DOOWidget(
+        baseUrl: '', // Invalid empty URL
         websiteToken: 'test-token',
       );
       _addResult('❌ Widget should validate parameters');
@@ -463,7 +465,7 @@ class _WidgetErrorTestPageState extends State<WidgetErrorTestPage> {
 
     // Test with null callbacks (should not crash)
     try {
-      DOOWidget(
+      const DOOWidget(
         baseUrl: 'http://localhost:3001',
         websiteToken: 'test-token',
       );
@@ -527,32 +529,32 @@ class _WidgetErrorTestPageState extends State<WidgetErrorTestPage> {
                       final result = _widgetTestResults[index];
                       final isSuccess = result.contains('✅');
                       final isFailure = result.contains('❌');
-                      
+
                       return Container(
                         margin: const EdgeInsets.only(bottom: 8),
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: isSuccess 
-                              ? Colors.green.shade50 
-                              : isFailure 
-                                  ? Colors.red.shade50 
+                          color: isSuccess
+                              ? Colors.green.shade50
+                              : isFailure
+                                  ? Colors.red.shade50
                                   : Colors.grey.shade50,
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: isSuccess 
-                                ? Colors.green.shade300 
-                                : isFailure 
-                                    ? Colors.red.shade300 
+                            color: isSuccess
+                                ? Colors.green.shade300
+                                : isFailure
+                                    ? Colors.red.shade300
                                     : Colors.grey.shade300,
                           ),
                         ),
                         child: Text(
                           result,
                           style: TextStyle(
-                            color: isSuccess 
-                                ? Colors.green.shade800 
-                                : isFailure 
-                                    ? Colors.red.shade800 
+                            color: isSuccess
+                                ? Colors.green.shade800
+                                : isFailure
+                                    ? Colors.red.shade800
                                     : Colors.grey.shade800,
                             fontFamily: 'monospace',
                             fontSize: 13,

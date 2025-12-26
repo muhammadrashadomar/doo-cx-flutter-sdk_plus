@@ -1,13 +1,13 @@
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_user.dart';
-import 'package:doo_cx_flutter_sdk/ui/webview_widget/webview.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_user.dart';
+import 'package:doo_cx_flutter_sdk_plus/ui/webview_widget/webview.dart';
 import 'package:flutter/material.dart';
 
 /// DOOWidget is a ready-to-use webview component that displays the DOO chat interface
-/// 
+///
 /// This widget provides a full-featured chat experience that can be embedded directly
 /// into your Flutter application. It handles user authentication, file attachments,
 /// and event callbacks to integrate seamlessly with your app.
-/// 
+///
 /// {@category FlutterClientSdk}
 class DOOWidget extends StatefulWidget {
   /// Website channel token for authentication
@@ -29,7 +29,7 @@ class DOOWidget extends StatefulWidget {
   final dynamic customAttributes;
 
   /// Callback to handle file attachment selection
-  /// 
+  ///
   /// Should return a list of file URIs (currently supported only on Android devices)
   final Future<List<String>> Function()? onAttachFile;
 
@@ -41,24 +41,24 @@ class DOOWidget extends StatefulWidget {
 
   /// Callback triggered when the widget finishes loading
   final void Function()? onLoadCompleted;
-  
+
   /// Creates a DOOWidget instance with the specified configuration
-  /// 
+  ///
   /// [websiteToken] and [baseUrl] are required parameters.
   /// Providing [user] details is recommended for user identification.
-  const DOOWidget({
-    Key? key,
-    required this.websiteToken,
-    required this.baseUrl,
-    this.user,
-    this.locale = "en",
-    this.customAttributes,
-    this.closeWidget,
-    this.onAttachFile,
-    this.onLoadStarted,
-    this.onLoadProgress,
-    this.onLoadCompleted
-  }) : super(key: key);
+  const DOOWidget(
+      {Key? key,
+      required this.websiteToken,
+      required this.baseUrl,
+      this.user,
+      this.locale = "en",
+      this.customAttributes,
+      this.closeWidget,
+      this.onAttachFile,
+      this.onLoadStarted,
+      this.onLoadProgress,
+      this.onLoadCompleted})
+      : super(key: key);
 
   @override
   _DOOWidgetState createState() => _DOOWidgetState();

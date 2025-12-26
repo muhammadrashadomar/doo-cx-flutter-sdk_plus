@@ -1,7 +1,7 @@
-import 'package:doo_cx_flutter_sdk/data/doo_repository.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_message.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/doo_client_exception.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/responses/doo_event.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/doo_repository.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_message.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/doo_client_exception.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/responses/doo_event.dart';
 
 /// Comprehensive event handlers for DOO chat interactions.
 ///
@@ -32,7 +32,7 @@ import 'package:doo_cx_flutter_sdk/data/remote/responses/doo_event.dart';
 ///     showErrorSnackBar(error.cause);
 ///   },
 /// );
-/// 
+///
 /// final client = await DOOClient.create(
 ///   baseUrl: "https://your-instance.doo.ooo",
 ///   inboxIdentifier: "your_inbox",
@@ -47,7 +47,7 @@ import 'package:doo_cx_flutter_sdk/data/remote/responses/doo_event.dart';
 /// - [onPing]: Keepalive ping received
 /// - [onConfirmedSubscription]: WebSocket subscription confirmed
 ///
-/// ### Message Events  
+/// ### Message Events
 /// - [onMessageReceived]: New message from agent/bot
 /// - [onMessageSent]: Confirmation of sent message
 /// - [onMessageUpdated]: Existing message was modified
@@ -108,7 +108,7 @@ class DOOCallbacks {
   final void Function(DOOMessage)? onMessageUpdated;
 
   /// Triggered when a message is sent successfully
-  /// 
+  ///
   /// [message] is the sent message
   /// [echoId] is the temporary ID used to track the message
   final void Function(DOOMessage, String)? onMessageSent;

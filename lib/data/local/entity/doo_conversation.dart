@@ -1,5 +1,5 @@
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_contact.dart';
-import 'package:doo_cx_flutter_sdk/data/local/local_storage.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_contact.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/local_storage.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';

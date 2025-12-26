@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_contact.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_conversation.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_message.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/doo_client_exception.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/requests/doo_action.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/requests/doo_action_data.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/requests/doo_new_message_request.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/service/doo_client_api_interceptor.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_contact.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_conversation.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_message.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/doo_client_exception.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/requests/doo_action.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/requests/doo_action_data.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/requests/doo_new_message_request.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/service/doo_client_api_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 

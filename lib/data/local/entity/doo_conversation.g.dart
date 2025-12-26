@@ -8,7 +8,7 @@ part of 'doo_conversation.dart';
 
 class DOOConversationAdapter extends TypeAdapter<DOOConversation> {
   @override
-  final int typeId = 1;
+  final int typeId = 51;
 
   @override
   DOOConversation read(BinaryReader reader) {

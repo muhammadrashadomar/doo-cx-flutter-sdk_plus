@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_contact.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_conversation.dart';
-import 'package:doo_cx_flutter_sdk/data/local/local_storage.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/doo_client_exception.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/service/doo_client_auth_service.dart';
+
 import 'package:dio/dio.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_contact.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_conversation.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/local_storage.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/doo_client_exception.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/service/doo_client_auth_service.dart';
 import 'package:synchronized/synchronized.dart' as synchronized;
 
 /// Intercepts network requests and attaches inbox identifier, contact identifiers, conversation identifiers
@@ -61,7 +62,7 @@ class DOOClientApiInterceptor extends Interceptor {
               '[DOO SDK] No conversation found. Creating new conversation for contact=${contact.contactIdentifier} ...');
           conversation = await _authService.createNewConversation(
             _inboxIdentifier,
-            contact!.contactIdentifier!,
+            contact.contactIdentifier!,
           );
           await _localStorage.conversationDao.saveConversation(conversation);
           print('[DOO SDK] Conversation created: ${conversation.id}');
@@ -96,9 +97,9 @@ class DOOClientApiInterceptor extends Interceptor {
           .replaceAll(
               INTERCEPTOR_INBOX_IDENTIFIER_PLACEHOLDER, _inboxIdentifier)
           .replaceAll(INTERCEPTOR_CONTACT_IDENTIFIER_PLACEHOLDER,
-              contact!.contactIdentifier!)
+              contact.contactIdentifier!)
           .replaceAll(INTERCEPTOR_CONVERSATION_IDENTIFIER_PLACEHOLDER,
-              '${conversation!.id}');
+              '${conversation.id}');
 
       handler.next(newOptions);
     });
@@ -180,9 +181,9 @@ class DOOClientApiInterceptor extends Interceptor {
             .replaceAll(
                 INTERCEPTOR_INBOX_IDENTIFIER_PLACEHOLDER, _inboxIdentifier)
             .replaceAll(INTERCEPTOR_CONTACT_IDENTIFIER_PLACEHOLDER,
-                contact!.contactIdentifier!)
+                contact.contactIdentifier!)
             .replaceAll(INTERCEPTOR_CONVERSATION_IDENTIFIER_PLACEHOLDER,
-                '${conversation!.id}');
+                '${conversation.id}');
 
         try {
           final retried = await _authService.dio.fetch(retryOptions);

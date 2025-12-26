@@ -1,6 +1,6 @@
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_user.dart';
-import 'package:doo_cx_flutter_sdk/ui/doo_chat_theme.dart';
-import 'package:doo_cx_flutter_sdk/ui/doo_l10n.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_user.dart';
+import 'package:doo_cx_flutter_sdk_plus/ui/doo_chat_theme.dart';
+import 'package:doo_cx_flutter_sdk_plus/ui/doo_l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:intl/intl.dart';

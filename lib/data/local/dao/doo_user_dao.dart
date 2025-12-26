@@ -1,4 +1,4 @@
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_user.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_user.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class DOOUserDao {

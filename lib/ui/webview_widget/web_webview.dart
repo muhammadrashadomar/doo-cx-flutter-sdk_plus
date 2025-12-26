@@ -3,13 +3,13 @@ import 'dart:ui_web' as ui;
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:doo_cx_flutter_sdk/ui/webview_widget/utils.dart';
+import 'package:doo_cx_flutter_sdk_plus/ui/webview_widget/utils.dart';
 
 /// Web-specific implementation of DOO webview using HTML iframe
-/// 
+///
 /// This implementation uses HTML iframe for web platform compatibility
 /// since webview_flutter doesn't fully support web.
-/// 
+///
 /// {@category FlutterClientSdk}
 class WebWebview extends StatefulWidget {
   /// Website channel token for authentication
@@ -34,16 +34,16 @@ class WebWebview extends StatefulWidget {
   final void Function()? onLoadCompleted;
 
   /// Creates a WebWebview instance with the specified configuration
-  const WebWebview({
-    Key? key,
-    required this.websiteToken,
-    required this.baseUrl,
-    this.closeWidget,
-    this.onAttachFile,
-    this.onLoadStarted,
-    this.onLoadProgress,
-    this.onLoadCompleted
-  }) : super(key: key);
+  const WebWebview(
+      {Key? key,
+      required this.websiteToken,
+      required this.baseUrl,
+      this.closeWidget,
+      this.onAttachFile,
+      this.onLoadStarted,
+      this.onLoadProgress,
+      this.onLoadCompleted})
+      : super(key: key);
 
   @override
   _WebWebviewState createState() => _WebWebviewState();
@@ -58,10 +58,10 @@ class _WebWebviewState extends State<WebWebview> {
   void initState() {
     super.initState();
     _viewId = 'doo-widget-${DateTime.now().millisecondsSinceEpoch}';
-    
+
     // Register the view factory immediately
     _registerViewFactory();
-    
+
     _initWebView();
   }
 
@@ -84,8 +84,9 @@ class _WebWebviewState extends State<WebWebview> {
 
   Future<void> _initWebView() async {
     // Build widget URL
-    String webviewUrl = "${widget.baseUrl}/widget?website_token=${widget.websiteToken}&locale=en";
-    
+    String webviewUrl =
+        "${widget.baseUrl}/widget?website_token=${widget.websiteToken}&locale=en";
+
     // Get the stored conversation cookie if available
     final dooConversationCookie = await StoreHelper.getCookie();
     if (dooConversationCookie.isNotEmpty) {
@@ -118,7 +119,7 @@ class _WebWebviewState extends State<WebWebview> {
       setState(() => _isLoading = false);
       widget.onLoadCompleted?.call();
       widget.onLoadProgress?.call(100);
-      
+
       // Inject JavaScript after iframe loads
       _injectJavaScript();
     });
@@ -132,7 +133,7 @@ class _WebWebviewState extends State<WebWebview> {
         locale: "en",
         customAttributes: null,
       );
-      
+
       // Try to inject JavaScript into iframe (may be restricted by CORS)
       if (injectedJavaScript.isNotEmpty) {
         final script = '''
@@ -142,12 +143,10 @@ class _WebWebviewState extends State<WebWebview> {
             console.log('DOO SDK: Script injection error:', e);
           }
         ''';
-        
+
         // Send script to iframe via postMessage
-        _iframe.contentWindow?.postMessage({
-          'type': 'script',
-          'script': script
-        }, '*');
+        _iframe.contentWindow
+            ?.postMessage({'type': 'script', 'script': script}, '*');
       }
     } catch (e) {
       if (kDebugMode) {
@@ -161,18 +160,18 @@ class _WebWebviewState extends State<WebWebview> {
       final data = event.data;
       if (data is Map) {
         final type = data['type'];
-        
+
         // Handle close widget events
         if (type == 'close-widget' || type == 'close') {
           Future.microtask(() {
             widget.closeWidget?.call();
           });
         }
-        
+
         // Handle DOO specific events
         if (data.containsKey('event')) {
           final eventType = data['event'];
-          
+
           if (eventType == 'loaded') {
             final authToken = data['config']?['authToken'];
             if (authToken != null) {
@@ -188,7 +187,7 @@ class _WebWebviewState extends State<WebWebview> {
           final parsedMessage = jsonDecode(message);
           final eventType = parsedMessage["event"];
           final type = parsedMessage["type"];
-          
+
           if (eventType == 'loaded') {
             final authToken = parsedMessage["config"]?["authToken"];
             if (authToken != null) {
@@ -196,8 +195,10 @@ class _WebWebviewState extends State<WebWebview> {
               _injectJavaScript();
             }
           }
-          
-          if (type == 'close-widget' || type == 'close' || eventType == 'close-widget') {
+
+          if (type == 'close-widget' ||
+              type == 'close' ||
+              eventType == 'close-widget') {
             Future.microtask(() {
               widget.closeWidget?.call();
             });

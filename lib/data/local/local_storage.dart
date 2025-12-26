@@ -1,19 +1,20 @@
-import 'package:doo_cx_flutter_sdk/data/local/dao/doo_contact_dao.dart';
-import 'package:doo_cx_flutter_sdk/data/local/dao/doo_conversation_dao.dart';
-import 'package:doo_cx_flutter_sdk/data/local/dao/doo_messages_dao.dart';
-import 'package:doo_cx_flutter_sdk/data/local/dao/doo_user_dao.dart';
-import 'package:doo_cx_flutter_sdk/data/local/entity/doo_conversation.dart';
-import 'package:doo_cx_flutter_sdk/data/remote/responses/doo_event.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_contact_dao.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_conversation_dao.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_messages_dao.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_user_dao.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_conversation.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/remote/responses/doo_event.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'entity/doo_contact.dart';
 import 'entity/doo_message.dart';
 import 'entity/doo_user.dart';
 
-const DOO_CONTACT_HIVE_TYPE_ID = 0;
-const DOO_CONVERSATION_HIVE_TYPE_ID = 1;
-const DOO_MESSAGE_HIVE_TYPE_ID = 2;
-const DOO_USER_HIVE_TYPE_ID = 3;
-const DOO_EVENT_USER_HIVE_TYPE_ID = 4;
+const DOO_CONTACT_HIVE_TYPE_ID = 50;
+const DOO_CONVERSATION_HIVE_TYPE_ID = 51;
+const DOO_MESSAGE_HIVE_TYPE_ID = 52;
+const DOO_USER_HIVE_TYPE_ID = 53;
+const DOO_EVENT_USER_HIVE_TYPE_ID = 54;
 
 class LocalStorage {
   DOOUserDao userDao;
