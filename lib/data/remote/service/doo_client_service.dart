@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_contact.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_conversation.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_message.dart';
@@ -9,7 +10,6 @@ import 'package:doo_cx_flutter_sdk_plus/data/remote/requests/doo_action.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/remote/requests/doo_action_data.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/remote/requests/doo_new_message_request.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/remote/service/doo_client_api_interceptor.dart';
-import 'package:dio/dio.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 /// Service for handling DOO api calls
@@ -47,9 +47,23 @@ class DOOClientServiceImpl extends DOOClientService {
   @override
   Future<DOOMessage> createMessage(DOONewMessageRequest request) async {
     try {
+      final Map<String, dynamic> data = {
+        "content": request.content,
+        "echo_id": request.echoId,
+      };
+
+      if (request.attachmentPaths != null &&
+          request.attachmentPaths!.isNotEmpty) {
+        data["attachments[]"] = await Future.wait(request.attachmentPaths!
+            .map((path) => MultipartFile.fromFile(path))
+            .toList());
+      }
+
+      final formData = FormData.fromMap(data);
+
       final createResponse = await _dio.post(
           "/public/api/v1/inboxes/${DOOClientApiInterceptor.INTERCEPTOR_INBOX_IDENTIFIER_PLACEHOLDER}/contacts/${DOOClientApiInterceptor.INTERCEPTOR_CONTACT_IDENTIFIER_PLACEHOLDER}/conversations/${DOOClientApiInterceptor.INTERCEPTOR_CONVERSATION_IDENTIFIER_PLACEHOLDER}/messages",
-          data: request.toJson());
+          data: formData);
       if ((createResponse.statusCode ?? 0).isBetween(199, 300)) {
         return DOOMessage.fromJson(createResponse.data);
       } else {

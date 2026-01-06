@@ -60,16 +60,17 @@ class DOOMessage extends Equatable {
   ///checks if message belongs to contact making the request
   bool get isMine => messageType != 1;
 
-  DOOMessage(
-      {required this.id,
-      required this.content,
-      required this.messageType,
-      required this.contentType,
-      required this.contentAttributes,
-      required this.createdAt,
-      required this.conversationId,
-      required this.attachments,
-      required this.sender});
+  DOOMessage({
+    required this.id,
+    required this.content,
+    required this.messageType,
+    required this.contentType,
+    required this.contentAttributes,
+    required this.createdAt,
+    required this.conversationId,
+    required this.attachments,
+    required this.sender,
+  });
 
   factory DOOMessage.fromJson(Map<String, dynamic> json) =>
       _$DOOMessageFromJson(json);

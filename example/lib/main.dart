@@ -462,13 +462,13 @@ class _MyDOOClientDialogState extends State<MyDOOClientDialog> {
         contentAttributes: {"attachmentUri": uri},
         createdAt: DateTime.now().toIso8601String(),
         conversationId: 0,
-        attachments: const [],
+        attachments: [uri],
         sender: null,
       );
       setState(() => _messages.add(optimistic));
       _jumpToBottom();
 
-      await _client!.sendMessage(content: content);
+      await _client!.sendMessage(content: content, attachmentPaths: [uri]);
     } catch (e) {
       // You can show a toast/snackbar here if you want
     }

@@ -9,10 +9,10 @@ import 'package:doo_cx_flutter_sdk_plus/repository_parameters.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
-import 'doo_callbacks.dart';
 import 'data/local/entity/doo_user.dart';
 import 'data/local/local_storage.dart';
 import 'data/remote/doo_client_exception.dart';
+import 'doo_callbacks.dart';
 
 /// Represents a DOO client instance for programmatic chat interactions.
 ///
@@ -173,12 +173,10 @@ class DOOClient {
   Future<String> sendMessage(
       {required String content,
       String? echoId,
-      Map<String, dynamic>? attachments}) async {
+      List<String>? attachmentPaths}) async {
     final messageId = echoId ?? _uuid.v4();
     final request = DOONewMessageRequest(
-      content: content,
-      echoId: messageId,
-    );
+        content: content, echoId: messageId, attachmentPaths: attachmentPaths);
     await _repository.sendMessage(request);
     return messageId;
   }
