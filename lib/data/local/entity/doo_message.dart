@@ -1,3 +1,4 @@
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_attachment.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/remote/responses/doo_event.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
@@ -50,7 +51,7 @@ class DOOMessage extends Equatable {
   ///list of media/doc/file attachment for message
   @JsonKey()
   @HiveField(7)
-  final List<dynamic>? attachments;
+  final List<DOOAttachment>? attachments;
 
   ///The user this message belongs to
   @JsonKey(name: "sender")

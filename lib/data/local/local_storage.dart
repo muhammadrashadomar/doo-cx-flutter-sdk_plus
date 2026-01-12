@@ -2,6 +2,7 @@ import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_contact_dao.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_conversation_dao.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_messages_dao.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/dao/doo_user_dao.dart';
+import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_attachment.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_conversation.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/remote/responses/doo_event.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,6 +16,7 @@ const DOO_CONVERSATION_HIVE_TYPE_ID = 51;
 const DOO_MESSAGE_HIVE_TYPE_ID = 52;
 const DOO_USER_HIVE_TYPE_ID = 53;
 const DOO_EVENT_USER_HIVE_TYPE_ID = 54;
+const DOO_ATTACHMENT_HIVE_TYPE_ID = 55;
 
 class LocalStorage {
   DOOUserDao userDao;
@@ -46,6 +48,10 @@ class LocalStorage {
       }
       if (!Hive.isAdapterRegistered(DOO_USER_HIVE_TYPE_ID)) {
         Hive..registerAdapter(DOOUserAdapter());
+      }
+
+      if (!Hive.isAdapterRegistered(DOO_ATTACHMENT_HIVE_TYPE_ID)) {
+        Hive..registerAdapter(DOOAttachmentAdapter());
       }
     } else {
       onInitializeHive();
