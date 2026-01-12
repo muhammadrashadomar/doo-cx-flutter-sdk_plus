@@ -22,14 +22,15 @@ class DOOUserAdapter extends TypeAdapter<DOOUser> {
       name: fields[2] as String?,
       email: fields[3] as String?,
       avatarUrl: fields[4] as String?,
-      customAttributes: fields[5] as dynamic,
+      customAttributes: (fields[5] as Map?)?.cast<String, String>(),
+      contactAttributes: (fields[6] as Map?)?.cast<String, String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, DOOUser obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.identifier)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class DOOUserAdapter extends TypeAdapter<DOOUser> {
       ..writeByte(4)
       ..write(obj.avatarUrl)
       ..writeByte(5)
-      ..write(obj.customAttributes);
+      ..write(obj.customAttributes)
+      ..writeByte(6)
+      ..write(obj.contactAttributes);
   }
 
   @override
@@ -65,7 +68,14 @@ DOOUser _$DOOUserFromJson(Map<String, dynamic> json) => DOOUser(
       name: json['name'] as String?,
       email: json['email'] as String?,
       avatarUrl: json['avatar_url'] as String?,
-      customAttributes: json['custom_attributes'],
+      customAttributes:
+          (json['custom_attributes'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
+      contactAttributes:
+          (json['contact_attributes'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
     );
 
 Map<String, dynamic> _$DOOUserToJson(DOOUser instance) => <String, dynamic>{
@@ -75,4 +85,5 @@ Map<String, dynamic> _$DOOUserToJson(DOOUser instance) => <String, dynamic>{
       'email': instance.email,
       'avatar_url': instance.avatarUrl,
       'custom_attributes': instance.customAttributes,
+      'contact_attributes': instance.contactAttributes,
     };

@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_contact.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_conversation.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/local/entity/doo_user.dart';
 import 'package:doo_cx_flutter_sdk_plus/data/remote/doo_client_exception.dart';
-import 'package:dio/dio.dart';
 
 abstract class DOOClientAuthService {
   final Dio dio;

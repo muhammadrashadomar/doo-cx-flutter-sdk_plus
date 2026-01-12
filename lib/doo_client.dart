@@ -369,6 +369,8 @@ class DOOClient {
         inboxIdentifier: inboxIdentifier,
         userIdentifier: user?.identifier,
         websiteToken: websiteToken,
+        contactCustomAttributes: user?.customAttributes,
+        customAttributes: user?.customAttributes,
         locale: locale);
 
     final client = DOOClient._(dooParams, callbacks: callbacks, user: user);
