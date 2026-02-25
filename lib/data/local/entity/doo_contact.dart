@@ -12,7 +12,7 @@ class DOOContact extends Equatable {
   ///unique identifier of contact
   @JsonKey(name: "id")
   @HiveField(0)
-  final int id;
+  final int? id;
 
   ///Source id of contact obtained on contact create
   @JsonKey(name: "source_id")
@@ -27,19 +27,19 @@ class DOOContact extends Equatable {
   ///Full name of contact
   @JsonKey()
   @HiveField(3)
-  final String name;
+  final String? name;
 
   ///Email of contact
   @JsonKey()
   @HiveField(4)
-  final String email;
+  final String? email;
 
   DOOContact({
-    required this.id,
-    required this.contactIdentifier,
-    required this.pubsubToken,
-    required this.name,
-    required this.email,
+    this.id,
+    this.contactIdentifier,
+    this.pubsubToken,
+    this.name,
+    this.email,
   });
 
   factory DOOContact.fromJson(Map<String, dynamic> json) =>

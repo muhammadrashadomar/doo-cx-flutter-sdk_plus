@@ -17,11 +17,11 @@ class DOOContactAdapter extends TypeAdapter<DOOContact> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return DOOContact(
-      id: fields[0] as int,
+      id: fields[0] as int?,
       contactIdentifier: fields[1] as String?,
       pubsubToken: fields[2] as String?,
-      name: fields[3] as String,
-      email: fields[4] as String,
+      name: fields[3] as String?,
+      email: fields[4] as String?,
     );
   }
 
@@ -57,11 +57,11 @@ class DOOContactAdapter extends TypeAdapter<DOOContact> {
 // **************************************************************************
 
 DOOContact _$DOOContactFromJson(Map<String, dynamic> json) => DOOContact(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       contactIdentifier: json['source_id'] as String?,
       pubsubToken: json['pubsub_token'] as String?,
-      name: json['name'] as String,
-      email: json['email'] as String,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
     );
 
 Map<String, dynamic> _$DOOContactToJson(DOOContact instance) =>
